@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
-  const [isPending, setIsPending] = useState("false");
+  const [isPending, setIsPending] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,13 +14,17 @@ const Create = () => {
     // console.log(blog);
     // send post request to JSON server
     setIsPending(true);
-    fetch("http://localhost:8000/blogs", {
+    fetch("http://localhost:8000/blogs/", {
       method: "POST",
-      header: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
     }).then(() => {
       console.log("new blog added");
       setIsPending(false);
+      // history.go(-1); back to last page you were at
+
+      // take to the Home page
+      history.push("/");
     });
   };
 
