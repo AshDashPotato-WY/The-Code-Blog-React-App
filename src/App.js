@@ -6,6 +6,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
+import BlogDetails from "./BlogDetails";
 
 function App() {
   // object/boolean can't be output
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route path="/create">
               <Create />
+            </Route>
+            <Route path="/blogs/:id">
+              <BlogDetails />
             </Route>
           </Switch>
         </div>
